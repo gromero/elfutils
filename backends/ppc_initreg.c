@@ -93,7 +93,7 @@ ppc_set_initial_registers_tid (pid_t tid __attribute__ ((unused)),
 	return false;
     }
   const size_t gprs = sizeof (user_regs.r.gpr) / sizeof (*user_regs.r.gpr);
-  Dwarf_Word dwarf_regs[gprs];
+  Dwarf_Word dwarf_regs[ sizeof (user_regs.r.gpr) / sizeof (*user_regs.r.gpr)];
   for (unsigned gpr = 0; gpr < gprs; gpr++)
     dwarf_regs[gpr] = user_regs.r.gpr[gpr];
   if (! setfunc (0, gprs, dwarf_regs, arg))
